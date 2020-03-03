@@ -19,6 +19,7 @@ pub enum EventKind {
     Ok,
     Failed,
     Ignored,
+    Timeout
 }
 
 #[derive(Deserialize, Debug, Eq, PartialEq)]

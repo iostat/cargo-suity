@@ -67,7 +67,7 @@ impl TestSuite {
                                 return Err(SuityError::MultipleTestRuns);
                             }
                         },
-                        EventKind::Failed | EventKind::Ok => {
+                        EventKind::Failed | EventKind::Ok | EventKind::Timeout => {
                             suite.failures = s.failed.unwrap();
                         }
                     }
@@ -94,6 +94,17 @@ impl TestSuite {
                                 }
                             )
                         }
+                        EventKind::Timeout => {
+                            suite.test_cases.push(
+                                TestCase {
+                                    name: t.name,
+                                    failure: Some(Failure{
+                                        message: format!("[TIMEOUT] {}", t.stdout.unwrap())
+                                    })
+                                }
+                            )
+                        }
+
                     }
 
                 }
