@@ -76,6 +76,7 @@ impl TestSuite {
                     match t.event {
                         EventKind::Started => { /* no-op */ },
                         EventKind::Ignored => { /* no-op */ },
+                        EventKind::Timeout => { /* no-op, probably gets re-emitted as Ok/Fail */ },
                         EventKind::Ok => {
                             suite.test_cases.push(
                                 TestCase {
@@ -94,17 +95,6 @@ impl TestSuite {
                                 }
                             )
                         }
-                        EventKind::Timeout => {
-                            suite.test_cases.push(
-                                TestCase {
-                                    name: t.name,
-                                    failure: Some(Failure{
-                                        message: String::from("Test timed out")
-                                    })
-                                }
-                            )
-                        }
-
                     }
 
                 }
