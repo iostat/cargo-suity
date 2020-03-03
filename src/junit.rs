@@ -99,7 +99,7 @@ impl TestSuite {
                                 TestCase {
                                     name: t.name,
                                     failure: Some(Failure{
-                                        message: format!("[TIMEOUT] {}", t.stdout.unwrap())
+                                        message: String::from("Test timed out")
                                     })
                                 }
                             )
