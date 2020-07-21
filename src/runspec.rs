@@ -199,7 +199,7 @@ fn add_common_args(args: &mut Vec<String>) {
 }
 
 fn map_to_binary(name: &String) -> Option<PathBuf> {
-    if let Ok(entries) = fs::read_dir("target/debug") {
+    if let Ok(entries) = fs::read_dir("target/debug/deps") {
         let mut executables: Vec<PathBuf> = entries
             .filter_map(Result::ok)
             .filter(filters::file_with_content)
